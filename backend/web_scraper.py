@@ -1,11 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_data():
-    url = 'https://www.seusite.com'  # Substitua pela URL real que você deseja extrair
-    response = requests.get(url)
-    
-    if response.status_code == 200:
+def scrape_data(query):
+    # Formatar a URL corretamente
+    url = f'https://g1.com.br/busca?q={query}'  # URL de busca correta
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Levanta um erro para códigos de status HTTP 4xx e 5xx
+
         soup = BeautifulSoup(response.text, 'html.parser')
         
         # Exemplo: extrair todos os títulos de artigos
@@ -18,5 +20,5 @@ def scrape_data():
             'titles': titles,
             'paragraphs': paragraphs
         }
-    else:
-        return {'error': 'Failed to retrieve data'}
+    except requests.exceptions.RequestException as e:
+        return {'error': f'Failed to retrieve data: {e}'}

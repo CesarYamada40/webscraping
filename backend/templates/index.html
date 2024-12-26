@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+</head>
+<body>
+    <h1>Buscador de Dados</h1>
+    <form method="POST">
+        <label for="search_query">Insira a informação que deseja buscar:</label>
+        <input type="text" name="search_query" id="search_query" required>
+        <button type="submit">Buscar</button>
+    </form>
+    {% if results %}
+        <h2>Resultados:</h2>
+        <ul>
+            {% for result in results %}
+                <li>{{ result }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
